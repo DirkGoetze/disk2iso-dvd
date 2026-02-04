@@ -1,0 +1,21 @@
+<!-- DVD Widget Settings -->
+<!-- Dynamisch geladen via dvd_widget_settings.js -->
+<div class="form-section" id="dvd-widget-settings">
+    <h2>
+        <img src="{{ url_for('static', filename='img/dvd.svg') }}" alt="" style="width:24px;height:24px;vertical-align:middle;margin-right:8px;">
+        Video-DVD Modul
+    </h2>
+    
+    <div class="form-group">
+        <label>
+            <input type="checkbox" id="dvd_active" name="dvd_active" {{ 'checked' if config.active else '' }}>
+            Video-DVD Support aktivieren
+        </label>
+        <div class="help-text">
+            Aktiviert das Erstellen von ISO-Images von Video-DVDs (entschlüsselt oder verschlüsselt).
+            {% if not config.enabled %}
+            <br><strong style="color: #f56565;">⚠ Modul nicht vollständig konfiguriert (enabled=false)</strong>
+            {% endif %}
+        </div>
+    </div>
+</div>
