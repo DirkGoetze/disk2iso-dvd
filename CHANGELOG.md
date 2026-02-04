@@ -8,6 +8,7 @@ und dieses Projekt folgt [Semantic Versioning](https://semver.org/lang/de/).
 ## [Unreleased]
 
 ### Geplant
+
 - Automatische Chapter-Erkennung
 - Multi-Angle Support
 - Untertitel-Extraktion
@@ -16,6 +17,7 @@ und dieses Projekt folgt [Semantic Versioning](https://semver.org/lang/de/).
 ## [1.2.0] - 2026-02-04
 
 ### Added
+
 - Initiale Abtrennung als eigenständiges Modul
 - dvdbackup Unterstützung für entschlüsselte Backups
 - ddrescue Fallback für robustes Kopieren
@@ -28,16 +30,19 @@ und dieses Projekt folgt [Semantic Versioning](https://semver.org/lang/de/).
 - Retry-Mechanismus bei Fehlern
 
 ### Changed
+
 - Unabhängiges Repository von disk2iso Core
 - Modulare INI-basierte Konfiguration
 - Optionale Integration (nicht mehr im Core)
 
 ### Fixed
+
 - Keine bekannten Fehler
 
 ## [1.0.0] - 2025-XX-XX
 
-### Added
+### Features
+
 - Erste Version als Teil von disk2iso Core
 - Basis-Funktionalität für DVD-Video Kopieren
 

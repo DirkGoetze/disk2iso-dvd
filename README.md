@@ -115,7 +115,7 @@ sudo journalctl -u disk2iso -f
 
 ### Via Web-UI
 
-1. Öffne http://your-server:5000
+1. Öffne <http://your-server:5000>
 2. Lege DVD ein
 3. Klicke auf **Kopieren starten**
 4. Verfolge Fortschritt in Echtzeit
@@ -123,7 +123,8 @@ sudo journalctl -u disk2iso -f
 ## 📊 Ausgabe-Struktur
 
 ### Methode 1: Entschlüsselt (dvdbackup)
-```
+
+```text
 /media/iso/dvd/
 ├── Movie_Title_2024/
 │   ├── VIDEO_TS/                  # Entschlüsselter DVD-Inhalt
@@ -136,7 +137,8 @@ sudo journalctl -u disk2iso -f
 ```
 
 ### Methode 2/3: Verschlüsselt (ddrescue/dd)
-```
+
+```text
 /media/iso/dvd/
 ├── Movie_Title_2024.iso           # ISO-Image (verschlüsselt)
 └── Movie_Title_2024.iso.log       # Kopiervorgang-Log
@@ -185,7 +187,8 @@ Das Modul versucht automatisch verschiedene Methoden:
 3. **Versuch 3**: dd (verschlüsselt, langsam) - bei ddrescue-Fehler
 
 Fehler werden geloggt und der Benutzer wird informiert:
-```
+
+```text
 [ERROR] dvdbackup failed (Exit: 1) - trying ddrescue...
 [INFO] Switching to ddrescue method
 [SUCCESS] DVD copied successfully with ddrescue
@@ -213,7 +216,7 @@ curl http://localhost:5000/api/status
 
 ### Struktur
 
-```
+```text
 disk2iso-dvd/
 ├── conf/
 │   └── libdvd.ini              # Modul-Manifest
