@@ -23,7 +23,7 @@ def get_dvd_settings():
     try:
         ini_path = get_dvd_ini_path()
         
-        config = {
+        settings = {
             "enabled": True,
             "active": True
         }
@@ -33,10 +33,10 @@ def get_dvd_settings():
             parser.read(ini_path)
             
             if parser.has_section('settings'):
-                config['enabled'] = parser.getboolean('settings', 'enabled', fallback=True)
-                config['active'] = parser.getboolean('settings', 'active', fallback=True)
+                settings['enabled'] = parser.getboolean('settings', 'enabled', fallback=True)
+                settings['active'] = parser.getboolean('settings', 'active', fallback=True)
         
-        return config
+        return settings
         
     except Exception as e:
         print(f"Fehler beim Lesen der DVD-Einstellungen: {e}", file=sys.stderr)
@@ -82,7 +82,7 @@ def api_dvd_settings_widget():
     config = get_dvd_settings()
     
     return render_template('widgets/dvd_widget_settings.html',
-                         config=config,
+                         settings=settings,
                          t=t)
 
 @dvd_settings_bp.route('/api/widgets/dvd/settings', methods=['POST'])
@@ -101,3 +101,4 @@ def api_save_dvd_settings():
             
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
+
