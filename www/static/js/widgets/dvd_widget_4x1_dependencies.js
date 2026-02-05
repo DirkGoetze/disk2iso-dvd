@@ -25,6 +25,7 @@ function updateDvdDependencies(softwareList) {
     // DVD-spezifische Tools (aus libdvd.ini [dependencies])
     const dvdTools = [
         { name: 'dvdbackup', display_name: 'dvdbackup' },
+        { name: 'genisoimage', display_name: 'genisoimage' },
         { name: 'ddrescue', display_name: 'GNU ddrescue' }
     ];
     
@@ -33,21 +34,12 @@ function updateDvdDependencies(softwareList) {
     dvdTools.forEach(tool => {
         const software = softwareList.find(s => s.name === tool.name);
         if (software) {
-            const statusBadge = getStatusBadge(software);
-            const rowClass = !software.installed_version ? 'row-inactive' : '';
-            
-            html += `
-                <tr class="${rowClass}">
-                    <td><strong>${tool.display_name}</strong></td>
-                    <td>${software.installed_version || '<em>Nicht installiert</em>'}</td>
-                    <td>${statusBadge}</td>
-                </tr>
-            `;
+            html += renderSoftwareRow(tool.display_name, software);
         }
     });
     
     if (html === '') {
-        html = '<tr><td colspan="3" style="text-align: center; padding: 20px; color: #999;">Keine Informationen verfügbar</td></tr>';
+        html = '<tr><td colspan="4" style="text-align: center; padding: 20px; color: #999;">Keine Informationen verfügbar</td></tr>';
     }
     
     tbody.innerHTML = html;
@@ -57,7 +49,7 @@ function showDvdDependenciesError() {
     const tbody = document.getElementById('dvd-dependencies-tbody');
     if (!tbody) return;
     
-    tbody.innerHTML = '<tr><td colspan="3" style="text-align: center; padding: 20px; color: #e53e3e;">Fehler beim Laden</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 20px; color: #e53e3e;">Fehler beim Laden</td></tr>';
 }
 
 // Auto-Load

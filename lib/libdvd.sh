@@ -242,7 +242,7 @@ copy_video_dvd() {
     
     # Prüfe Speicherplatz (Overhead wird automatisch berechnet)
     if [[ $dvd_size_mb -gt 0 ]]; then
-        if ! check_disk_space "$dvd_size_mb"; then
+        if ! systeminfo_check_disk_space "$dvd_size_mb"; then
             return 1
         fi
     fi
@@ -362,3 +362,58 @@ copy_video_dvd() {
 # und ruft entsprechenden Worker auf. Metadaten-Erstellung erfolgt im
 # Orchestrator nach erfolgreichem Worker-Aufruf.
 # ============================================================================
+# ============================================================================
+# SOFTWARE INFORMATION (für Widgets)
+# ============================================================================
+
+# ===========================================================================
+# dvd_collect_software_info
+# ---------------------------------------------------------------------------
+# Funktion.: Sammle DVD-Modul Software-Informationen
+# Parameter: keine
+# Rückgabe.: 0 = Erfolg, 1 = Fehler
+# Schreibt.: api/dvd_software_info.json
+# Hinweis..: Liest Dependencies aus libdvd.ini und nutzt zentrale Prüfung
+# ===========================================================================
+dvd_collect_software_info() {
+    local api_dir=$(folders_get_api_dir) || return 1
+    
+    # Lese optionale Dependencies aus INI (external ist leer)
+    local optional_deps=$(config_get_value_ini "dvd" "dependencies" "optional")
+    # Format: "dvdbackup,genisoimage,ddrescue"
+    
+    # Konvertiere zu Array
+    IFS=',' read -ra dep_array <<< "$optional_deps"
+    
+    # Rufe zentrale Prüffunktion auf (aus libsysteminfo.sh)
+    local software_json=$(systeminfo_check_software_list "${dep_array[@]}")
+    
+    # Schreibe in Modul-spezifisches JSON
+    echo "$software_json" > "${api_dir}/dvd_software_info.json"
+    
+    return 0
+}
+
+# ===========================================================================
+# dvd_get_software_info
+# ---------------------------------------------------------------------------
+# Funktion.: Lese DVD-Software-Informationen für Widget
+# Parameter: keine
+# Rückgabe.: 0 = Erfolg, 1 = Fehler
+# Ausgabe..: JSON-Array (stdout)
+# Für.....: dvd_widget_4x1_dependencies
+# Nutzung..: Wird von /api/modules/dvd/software aufgerufen
+# ===========================================================================
+dvd_get_software_info() {
+    local api_dir=$(folders_get_api_dir) || return 1
+    local json_file="${api_dir}/dvd_software_info.json"
+    
+    # Fallback: Sammle Daten wenn JSON nicht existiert
+    if [[ ! -f "$json_file" ]]; then
+        dvd_collect_software_info || return 1
+    fi
+    
+    # Gib JSON aus
+    cat "$json_file"
+    return 0
+}
