@@ -1,5 +1,5 @@
 /**
- * disk2iso - DVD Settings Widget
+ * disk2iso - Settings Widget (4x1) - DVD
  * Lädt DVD Einstellungen dynamisch
  */
 

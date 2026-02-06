@@ -1,11 +1,11 @@
 /**
- * DVD Module - Dependencies Widget (4x1)
+ * Dependencies Widget (4x1) - DVD
  * Zeigt DVD-Video spezifische Tools (dvdbackup, ddrescue)
  * Version: 1.0.0
  */
 
 function loadDvdDependencies() {
-    fetch('/api/system')
+    fetch('/api/widgets/dvd/dependencies')
         .then(response => response.json())
         .then(data => {
             if (data.success && data.software) {

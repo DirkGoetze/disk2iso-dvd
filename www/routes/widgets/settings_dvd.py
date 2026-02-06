@@ -81,8 +81,8 @@ def api_dvd_settings_widget():
     """
     config = get_dvd_settings()
     
-    return render_template('widgets/dvd_widget_settings.html',
-                         settings=settings,
+    return render_template('widgets/settings_4x1_dvd.html',
+                         settings=config,
                          t=t)
 
 @dvd_settings_bp.route('/api/widgets/dvd/settings', methods=['POST'])
