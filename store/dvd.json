@@ -1,0 +1,63 @@
+{
+  "id": "dvd",
+  "name": "DVD-Video Modul",
+  "category": "optional",
+  "description": "Backup von DVD-Videos mit TMDB-Metadaten und Cover-Art",
+  "icon": "https://raw.githubusercontent.com/Disk2ISO/disk2iso-dvd/main/store/icon.svg",
+  "author": "Disk2ISO Team",
+  "homepage": "https://github.com/Disk2ISO/disk2iso-dvd",
+  "repository": "https://github.com/Disk2ISO/disk2iso-dvd",
+  "license": "MIT",
+  "requires": {
+    "disk2iso": ">=1.3.0"
+  },
+  "recommends": {
+    "metadata": ">=1.3.0",
+    "tmdb": ">=1.3.0"
+  },
+  "current_version": "1.3.0",
+  "versions": [
+    {
+      "version": "1.3.0",
+      "released": "2026-02-07",
+      "changelog": "Kompatibilität mit disk2iso 1.3.0 Service-Struktur",
+      "download_url": "https://github.com/Disk2ISO/disk2iso-dvd/releases/download/v1.3.0/dvd-module.zip",
+      "checksum_url": "https://github.com/Disk2ISO/disk2iso-dvd/releases/download/v1.3.0/dvd-module.zip.sha256",
+      "size": "TBD"
+    },
+    {
+      "version": "1.2.0",
+      "released": "2026-02-04",
+      "changelog": "Initiales Release als eigenständiges Modul",
+      "download_url": "https://github.com/Disk2ISO/disk2iso-dvd/releases/download/v1.2.0/dvd-module.zip",
+      "checksum_url": "https://github.com/Disk2ISO/disk2iso-dvd/releases/download/v1.2.0/dvd-module.zip.sha256",
+      "size": "TBD"
+    }
+  ],
+  "install_method": "unzip",
+  "install_path": "/opt/disk2iso/",
+  "post_install": [
+    "sudo systemctl restart disk2iso-web"
+  ],
+  "features": [
+    "dvdbackup für entschlüsselte Backups",
+    "dd für direkte ISO-Erstellung",
+    "TMDB Metadaten-Integration",
+    "Cover-Art Download",
+    "Automatische Medium-Erkennung",
+    "Multi-Language Support"
+  ],
+  "dependencies": {
+    "system": [
+      "dvdbackup",
+      "genisoimage",
+      "libdvd-pkg"
+    ]
+  },
+  "planned_features": [
+    "Automatische Chapter-Erkennung",
+    "Multi-Angle Support",
+    "Untertitel-Extraktion",
+    "Audio-Track Auswahl"
+  ]
+}
