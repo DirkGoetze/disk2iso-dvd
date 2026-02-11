@@ -42,7 +42,7 @@ dvd_check_dependencies() {
     log_debug "$MSG_DEBUG_DVD_CHECK_START"
 
     #-- Alle Modul Abhängigkeiten prüfen -------------------------------------
-    check_module_dependencies "$MODULE_NAME_DVD" || return 1
+    integrity_check_module_dependencies "$MODULE_NAME_DVD" || return 1
 
     #-- Lade Modul-Konfiguration --------------------------------------------
     load_config_dvd || return 1
@@ -102,7 +102,7 @@ is_dvd_ready() {
 # .........  abhängigen Modulen
 # Parameter: keine
 # Rückgabe.: Vollständiger Pfad zum Modul Verzeichnis
-# Hinweis: Ordner wird bereits in check_module_dependencies() erstellt
+# Hinweis: Ordner wird bereits in integrity_check_module_dependencies() erstellt
 # ===========================================================================
 get_path_dvd() {
     echo "${OUTPUT_DIR}/${MODULE_NAME_DVD}"
